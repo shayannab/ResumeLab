@@ -107,28 +107,23 @@ async function generatePDF(resumeContent, outputPath = null) {
         });
         doc.moveDown(0.3);
 
-        if (resumeContent.skills.technical && resumeContent.skills.technical.length > 0) {
-          doc.fontSize(10).font('Helvetica-Bold').text('Technical: ', {
-            continued: true,
-          });
-          doc.fontSize(10).font('Helvetica').text(resumeContent.skills.technical.join(', '));
-        }
+        const skillCategories = [
+          { key: 'languages', label: 'Programming Languages' },
+          { key: 'frameworks', label: 'Frameworks & Libraries' },
+          { key: 'databases', label: 'Databases' },
+          { key: 'cloud', label: 'Cloud & DevOps' },
+          { key: 'tools', label: 'Tools' }
+        ];
 
-        if (resumeContent.skills.soft && resumeContent.skills.soft.length > 0) {
-          doc.moveDown(0.2);
-          doc.fontSize(10).font('Helvetica-Bold').text('Soft Skills: ', {
-            continued: true,
-          });
-          doc.fontSize(10).font('Helvetica').text(resumeContent.skills.soft.join(', '));
-        }
-
-        if (resumeContent.skills.tools && resumeContent.skills.tools.length > 0) {
-          doc.moveDown(0.2);
-          doc.fontSize(10).font('Helvetica-Bold').text('Tools: ', {
-            continued: true,
-          });
-          doc.fontSize(10).font('Helvetica').text(resumeContent.skills.tools.join(', '));
-        }
+        skillCategories.forEach((category, index) => {
+          if (resumeContent.skills[category.key] && resumeContent.skills[category.key].length > 0) {
+            if (index > 0) doc.moveDown(0.2);
+            doc.fontSize(10).font('Helvetica-Bold').text(`${category.label}: `, {
+              continued: true,
+            });
+            doc.fontSize(10).font('Helvetica').text(resumeContent.skills[category.key].join(', '));
+          }
+        });
         doc.moveDown(1);
       }
 
@@ -286,38 +281,26 @@ async function generateDOCX(resumeContent, outputPath = null) {
         })
       );
 
-      if (resumeContent.skills.technical && resumeContent.skills.technical.length > 0) {
-        children.push(
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Technical: ', bold: true }),
-              new TextRun({ text: resumeContent.skills.technical.join(', ') }),
-            ],
-          })
-        );
-      }
+      const skillCategories = [
+        { key: 'languages', label: 'Programming Languages' },
+        { key: 'frameworks', label: 'Frameworks & Libraries' },
+        { key: 'databases', label: 'Databases' },
+        { key: 'cloud', label: 'Cloud & DevOps' },
+        { key: 'tools', label: 'Tools' }
+      ];
 
-      if (resumeContent.skills.soft && resumeContent.skills.soft.length > 0) {
-        children.push(
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Soft Skills: ', bold: true }),
-              new TextRun({ text: resumeContent.skills.soft.join(', ') }),
-            ],
-          })
-        );
-      }
-
-      if (resumeContent.skills.tools && resumeContent.skills.tools.length > 0) {
-        children.push(
-          new Paragraph({
-            children: [
-              new TextRun({ text: 'Tools: ', bold: true }),
-              new TextRun({ text: resumeContent.skills.tools.join(', ') }),
-            ],
-          })
-        );
-      }
+      skillCategories.forEach(category => {
+        if (resumeContent.skills[category.key] && resumeContent.skills[category.key].length > 0) {
+          children.push(
+            new Paragraph({
+              children: [
+                new TextRun({ text: `${category.label}: `, bold: true }),
+                new TextRun({ text: resumeContent.skills[category.key].join(', ') }),
+              ],
+            })
+          );
+        }
+      });
       children.push(new Paragraph({ text: '' })); // Spacing
     }
 
@@ -457,17 +440,19 @@ async function generatePlainText(resumeContent, outputPath = null) {
       text += 'SKILLS\n';
       text += '='.repeat(50) + '\n';
 
-      if (resumeContent.skills.technical && resumeContent.skills.technical.length > 0) {
-        text += `Technical: ${resumeContent.skills.technical.join(', ')}\n`;
-      }
+      const skillCategories = [
+        { key: 'languages', label: 'Programming Languages' },
+        { key: 'frameworks', label: 'Frameworks & Libraries' },
+        { key: 'databases', label: 'Databases' },
+        { key: 'cloud', label: 'Cloud & DevOps' },
+        { key: 'tools', label: 'Tools' }
+      ];
 
-      if (resumeContent.skills.soft && resumeContent.skills.soft.length > 0) {
-        text += `Soft Skills: ${resumeContent.skills.soft.join(', ')}\n`;
-      }
-
-      if (resumeContent.skills.tools && resumeContent.skills.tools.length > 0) {
-        text += `Tools: ${resumeContent.skills.tools.join(', ')}\n`;
-      }
+      skillCategories.forEach(category => {
+        if (resumeContent.skills[category.key] && resumeContent.skills[category.key].length > 0) {
+          text += `${category.label}: ${resumeContent.skills[category.key].join(', ')}\n`;
+        }
+      });
       text += '\n';
     }
 

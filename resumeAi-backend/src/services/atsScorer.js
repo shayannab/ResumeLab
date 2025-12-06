@@ -24,17 +24,14 @@ function extractResumeText(resumeContent) {
     });
   }
 
-  // Add skills
+  // Add skills (all categories)
   if (resumeContent.skills) {
-    if (Array.isArray(resumeContent.skills.technical)) {
-      text += resumeContent.skills.technical.join(' ') + ' ';
-    }
-    if (Array.isArray(resumeContent.skills.soft)) {
-      text += resumeContent.skills.soft.join(' ') + ' ';
-    }
-    if (Array.isArray(resumeContent.skills.tools)) {
-      text += resumeContent.skills.tools.join(' ') + ' ';
-    }
+    const skillCategories = ['languages', 'frameworks', 'databases', 'cloud', 'tools'];
+    skillCategories.forEach(category => {
+      if (Array.isArray(resumeContent.skills[category])) {
+        text += resumeContent.skills[category].join(' ') + ' ';
+      }
+    });
   }
 
   // Add education
@@ -170,18 +167,17 @@ function calculateSkillsCoverage(resumeContent, requiredSkills) {
       found = true;
     }
 
-    // Check in skills.technical array
-    if (!found && Array.isArray(resumeContent.skills?.technical)) {
-      found = resumeContent.skills.technical.some(
-        (s) => normalizeKeyword(s) === normalizedSkill || normalizeKeyword(s).includes(normalizedSkill) || normalizedSkill.includes(normalizeKeyword(s))
-      );
-    }
-
-    // Check in skills.tools array
-    if (!found && Array.isArray(resumeContent.skills?.tools)) {
-      found = resumeContent.skills.tools.some(
-        (s) => normalizeKeyword(s) === normalizedSkill || normalizeKeyword(s).includes(normalizedSkill) || normalizedSkill.includes(normalizeKeyword(s))
-      );
+    // Check in all skills categories
+    if (!found && resumeContent.skills) {
+      const skillCategories = ['languages', 'frameworks', 'databases', 'cloud', 'tools'];
+      for (const category of skillCategories) {
+        if (Array.isArray(resumeContent.skills[category])) {
+          found = resumeContent.skills[category].some(
+            (s) => normalizeKeyword(s) === normalizedSkill || normalizeKeyword(s).includes(normalizedSkill) || normalizedSkill.includes(normalizeKeyword(s))
+          );
+          if (found) break;
+        }
+      }
     }
 
     if (found) {
@@ -294,19 +290,21 @@ function calculateContentQuality(resumeContent) {
   if (resumeContent.skills) {
     let skillsScore = 0;
     
-    const technicalCount = Array.isArray(resumeContent.skills.technical) ? resumeContent.skills.technical.length : 0;
-    const softCount = Array.isArray(resumeContent.skills.soft) ? resumeContent.skills.soft.length : 0;
-    const toolsCount = Array.isArray(resumeContent.skills.tools) ? resumeContent.skills.tools.length : 0;
+    const skillCategories = ['languages', 'frameworks', 'databases', 'cloud', 'tools'];
+    let totalSkillsCount = 0;
+    
+    skillCategories.forEach(category => {
+      const count = Array.isArray(resumeContent.skills[category]) ? resumeContent.skills[category].length : 0;
+      totalSkillsCount += count;
+      
+      // Score based on category presence and count
+      if (count >= 3) skillsScore += 5;
+      else if (count >= 1) skillsScore += 2;
+    });
 
-    // Good skills distribution
-    if (technicalCount >= 5) skillsScore += 10;
-    else if (technicalCount >= 3) skillsScore += 5;
-
-    if (softCount >= 3) skillsScore += 5;
-    else if (softCount >= 1) skillsScore += 2;
-
-    if (toolsCount >= 2) skillsScore += 5;
-    else if (toolsCount >= 1) skillsScore += 2;
+    // Bonus for good overall skills distribution
+    if (totalSkillsCount >= 15) skillsScore += 5;
+    else if (totalSkillsCount >= 10) skillsScore += 3;
 
     score += skillsScore;
     factors++;
@@ -443,9 +441,16 @@ function generateSuggestions(scores, resumeContent, jobAnalysis) {
 
   // Skills section suggestions
   if (resumeContent.skills) {
-    const technicalCount = Array.isArray(resumeContent.skills.technical) ? resumeContent.skills.technical.length : 0;
-    if (technicalCount < 5) {
-      suggestions.push('Consider adding more technical skills to your skills section to better match the job requirements.');
+    const skillCategories = ['languages', 'frameworks', 'databases', 'cloud', 'tools'];
+    let totalSkillsCount = 0;
+    
+    skillCategories.forEach(category => {
+      const count = Array.isArray(resumeContent.skills[category]) ? resumeContent.skills[category].length : 0;
+      totalSkillsCount += count;
+    });
+    
+    if (totalSkillsCount < 10) {
+      suggestions.push('Consider adding more technical skills across different categories (languages, frameworks, databases, cloud, tools) to better match the job requirements.');
     }
   }
 
