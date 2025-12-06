@@ -1,13 +1,103 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-textPrimary font-sans;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-textPrimary;
+  }
+
+  p {
+    @apply text-textSecondary;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-white text-textPrimary border border-border rounded-lg px-6 py-3 font-medium transition-colors;
+  }
+
+  .btn-primary:hover {
+    @apply bg-hover;
+  }
+
+  .btn-cta {
+    @apply bg-success text-white rounded-lg px-6 py-3 font-medium transition-colors;
+  }
+
+  .btn-cta:hover {
+    @apply bg-accent;
+  }
+
+  .btn-disabled {
+    @apply bg-surface text-textSecondary cursor-not-allowed rounded-lg px-6 py-3 font-medium;
+  }
+
+  /* Input Styles */
+  .input-field {
+    @apply w-full bg-white border border-border rounded-lg px-4 py-3 text-textPrimary placeholder-textSecondary focus:outline-none focus:border-success transition-colors;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-lg p-6 shadow-subtle;
+  }
+
+  .card-border {
+    @apply card border border-border;
+  }
+
+  /* Score Badge Styles */
+  .score-poor {
+    @apply bg-error text-white px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  .score-fair {
+    @apply bg-warning text-white px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  .score-good {
+    @apply bg-hover text-textPrimary px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  .score-excellent {
+    @apply bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  /* Progress Bar */
+  .progress-track {
+    @apply w-full bg-surface rounded-full h-2;
+  }
+
+  .progress-fill {
+    @apply bg-success h-2 rounded-full transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .container-custom {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Resume Preview List Styling */
+.resume-preview ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.resume-preview ul li {
+  margin-bottom: 0.5rem;
+}
+
+.resume-preview ul li::marker {
+  color: #10B981; /* Green bullet color */
 }
