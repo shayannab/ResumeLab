@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# ResumeLab 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AI-powered resume builder that creates ATS-optimized resumes tailored to specific job postings.
 
-## Available Scripts
+![ResumeLab](https://img.shields.io/badge/React-18.x-blue) ![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- **Smart Job Analysis** - AI-powered extraction of skills, keywords, and requirements from any job posting
+- **ATS Optimization** - Generate resumes that pass Applicant Tracking Systems with high scores
+- **Cover Letter Generator** - AI-generated personalized cover letters for each application
+- **Skills Gap Analysis** - Identify missing skills and get recommendations
+- **Salary Insights** - Estimated salary ranges based on role and experience
+- **Multiple Export Formats** - Download as PDF, DOCX, or TXT
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Quick Start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js 18.x or higher
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/shayannab/get-that-job.git
+   cd get-that-job
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Set up environment variables**
+   ```bash
+   # Create .env file in root
+   REACT_APP_API_URL=http://localhost:3000/api
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+5. **Open in browser**
+   ```
+   http://localhost:3001
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Frontend**: React 18, Tailwind CSS
+- **Animations**: Custom Antigravity particles, Lucide icons
+- **Routing**: React Router v6
+- **API**: Axios
+- **Export**: PDF generation, DOCX support
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📁 Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+src/
+├── components/
+│   ├── ui/              # Reusable UI components
+│   ├── steps/           # Dashboard workflow steps
+│   └── LandingPage.js   # Main landing page
+├── pages/
+│   ├── Dashboard.jsx    # Resume builder workflow
+│   ├── Privacy.jsx      # Privacy policy
+│   └── Terms.jsx        # Terms of service
+├── services/
+│   └── api.js           # API client
+└── App.js               # Root component
+```
 
-## Learn More
+## 🎯 How It Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Paste a Job Posting** - Copy any job description
+2. **Answer Questions** - Fill out personalized questions about your experience
+3. **Generate Resume** - Get an ATS-optimized resume with instant scoring
+4. **Download & Apply** - Export in your preferred format
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🤝 Contributing
 
-### Code Splitting
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📄 License
 
-### Analyzing the Bundle Size
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🔗 Links
 
-### Making a Progressive Web App
+- [Live Demo](https://resumelab.app) *(coming soon)*
+- [Twitter/X](https://x.com/shayanna_0)
+- [GitHub](https://github.com/shayannab)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with ❤️ by [@shayannab](https://github.com/shayannab)

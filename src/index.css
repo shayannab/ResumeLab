@@ -286,11 +286,12 @@
 
   /* Hover Effects */
   .hover-lift {
-    @apply transition-transform duration-300;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .hover-lift:hover {
     transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 
   /* Glass Effect */
@@ -461,15 +462,7 @@
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Scale Up on Hover */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
 
 /* Icon Rotate on Hover */
 .icon-rotate:hover svg {

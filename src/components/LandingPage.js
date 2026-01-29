@@ -217,8 +217,8 @@ function LandingPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <StarBorder
                   as="button"
-                  color="cyan"
-                  speed="5s"
+                  color="#3b82f6"
+                  speed="3s"
                   onClick={() => navigate('/dashboard')}
                 >
                   <span className="flex items-center gap-2">
@@ -388,8 +388,8 @@ function LandingPage() {
           <div className="text-center mt-16">
             <StarBorder
               as="button"
-              color="cyan"
-              speed="5s"
+              color="#3b82f6"
+              speed="3s"
               onClick={() => navigate('/dashboard')}
             >
               Start Building Your Resume
@@ -457,8 +457,8 @@ function LandingPage() {
               </p>
               <StarBorder
                 as="button"
-                color="cyan"
-                speed="5s"
+                color="#3b82f6"
+                speed="3s"
                 className="mx-auto"
                 onClick={() => navigate('/dashboard')}
               >
